@@ -8,7 +8,7 @@ function TasksInput ({ addTask, updateTask }) {
     const [newTask, setNewTask] = useState("");
 
     const handleAddition = e => {
-        e.preventDefault();
+      e.preventDefault();
 
         console.log("hectic");
         console.log(newTask);
@@ -30,8 +30,8 @@ function TasksInput ({ addTask, updateTask }) {
     };
 
     return (
-        <form>
 
+        <div className="TodoActions">
             <input
                 type="text"
                 className="input"
@@ -41,7 +41,7 @@ function TasksInput ({ addTask, updateTask }) {
             </input>
 
             <button
-                onClick={() => handleAddition}
+                onClick={handleAddition}
             >
                 Add
             </button>
@@ -51,8 +51,8 @@ function TasksInput ({ addTask, updateTask }) {
             >
                 Update
             </button>
+        </div>
 
-        </form>
     )
 
 }

@@ -71,14 +71,14 @@ function App() {
       <div>
       {tasks.map((task, index) => (
 
-<TaskElement 
-      task={task}
-      key={index}
-      id = {index}
-      updateTaskElement={updateTaskElement}
-      checkTask={checkTask}
-      removeTask={removeTask}
-/>
+      <TaskElement 
+            task={task}
+            key={index}
+            id = {index}
+            updateTaskElement={updateTaskElement}
+            checkTask={checkTask}
+            removeTask={removeTask}
+      />
 
 ))}
 
