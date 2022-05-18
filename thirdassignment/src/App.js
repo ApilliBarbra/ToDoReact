@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import './App.css';
 import TaskElement from './TaskElement';
-import TasksInput from './TasksInput';
-
-
-
+import { React, useState } from 'react';
+import { FormControl, Button, InputGroup } from "react-bootstrap";
 
 function App() {
 
@@ -17,15 +14,37 @@ function App() {
     }
   ])
 
-  const [updateId, setUpdateId] = useState(-1);
+  const [newTask, setNewTask] = useState("");
+
+  const [updateTaskId, setUpdateTaskId] = useState(-1);
 
   const addTask = task => {
     const newTasksList = [...tasks, task];
-
     setTasks(newTasksList);
-
     console.log(newTasksList);
   }
+
+  const handleAddition = e => {
+    e.preventDefault();
+
+    console.log("hectic");
+    console.log(newTask);
+
+    // if it is empty, do nothing
+    if (!newTask) return;
+
+    console.log("Add element");
+
+    let newT = {
+        text: newTask,
+        isDone: false
+      }
+
+    addTask(newT);
+    setNewTask("");
+
+    console.log("Added");
+  };
 
   const checkTask = id => {
      const newTasksList = [...tasks];
@@ -33,63 +52,79 @@ function App() {
      setTasks(newTasksList);
   }
 
-  const updateTaskElement = id => {
-    setUpdateId(id);
-    const newTasksList = [...tasks];
-     newTasksList[id].toUpdate = !newTasksList[id].toUpdate;
-     setTasks(newTasksList);
-    console.log("Updated the id " + id);
-  }
-
-  const updateTask = (newText) => {
-
-    console.log("Id to udoate : " + updateId);
-
-    if (updateId === -1) return;
-
-    const newTasksList = [...tasks];
-
-    newTasksList[updateId].text = newText;
-
-    newTasksList[updateId].toUpdate = !newTasksList[updateId].toUpdate;
-
-    setTasks(newTasksList);
-    setUpdateId(-1);
-     
-  }
-
   const removeTask = id => {
-
     const newTasksList = [...tasks];
     newTasksList.splice(id,1);
     setTasks(newTasksList);
   }
 
+  const updateTaskElement = id => {
+    setUpdateTaskId(id);
+    const newTasksList = [...tasks];
+    newTasksList[id].toUpdate = !newTasksList[id].toUpdate;
+    setTasks(newTasksList);
+    setNewTask(newTasksList[id].text);
+  }
+
+  const updateTask = (newText) => {
+
+    if (updateTaskId === -1) return;
+
+    const newTasksList = [...tasks];
+
+    newTasksList[updateTaskId].text = newText;
+    newTasksList[updateTaskId].toUpdate = !newTasksList[updateTaskId].toUpdate;
+
+    setTasks(newTasksList);
+    setUpdateTaskId(-1);
+    setNewTask("");
+     
+  }
+
+
   return (
     <div className="ToDoApp">
 
-      <div>
-      {tasks.map((task, index) => (
+      <div className="Todos">
+        {tasks.map((task, index) => (
 
-      <TaskElement 
-            task={task}
-            key={index}
-            id = {index}
-            updateTaskElement={updateTaskElement}
-            checkTask={checkTask}
-            removeTask={removeTask}
-      />
+          <TaskElement 
+                task={task}
+                key={index}
+                id = {index}
+                updateTaskElement={updateTaskElement}
+                checkTask={checkTask}
+                removeTask={removeTask}
+          />
 
-))}
+        ))}
+      </div>
+      
+      <div className="TodoActions">
+
+        <InputGroup>
+            
+            <FormControl
+                placeholder="E.g. Go Shopping"
+                type="text"
+                className="input"
+                value={newTask}
+                onChange={e => setNewTask(e.target.value)}
+            />
+            
+            <Button 
+                variant="outline-secondary"
+                onClick={handleAddition}
+            >Add</Button>
+
+            <Button 
+                variant="outline-secondary"
+                onClick={() => updateTask(newTask)}
+            >Update</Button>
+
+        </InputGroup>
 
       </div>
-
-
-
-      <TasksInput 
-        addTask={addTask}
-        updateTask={updateTask}
-      />
 
     </div>
   );

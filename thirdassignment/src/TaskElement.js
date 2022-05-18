@@ -1,5 +1,5 @@
-
-
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function TaskElement ({task, id, updateTaskElement, checkTask, removeTask}) {
     
@@ -10,24 +10,23 @@ function TaskElement ({task, id, updateTaskElement, checkTask, removeTask}) {
             style={{display : task.toUpdate? "none" : "flex"}}
         >
 
-            <input
+            <Form.Check
                 type="checkbox"
                 defaultChecked={task.isDone}
                 onChange={e => checkTask(id)}
-            >
-            </input>
+            />
 
             <p style={{textDecoration : task.isDone ? "line-through" : ""}}>
                 {task.text}
             </p>
             
-            <button onClick={() => removeTask(id)}>
-                del
-            </button>
+            <Button onClick={() => removeTask(id)}>
+                delete
+            </Button>
 
-            <button onClick={() => updateTaskElement(id)}>
-                updent;
-            </button>
+            <Button onClick={() => updateTaskElement(id)}>
+                update;
+            </Button>
 
         </div>
 
