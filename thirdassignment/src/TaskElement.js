@@ -1,35 +1,79 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+//import Button from "react-bootstrap/Button";
+import {Col, Row, Container, Form, Button} from "react-bootstrap";
+//import Form from 'react-bootstrap';
 
 function TaskElement ({task, id, updateTaskElement, checkTask, removeTask}) {
     
+      // well trying things
+  const btn = {
+    backgroundColor:'#00695c',
+    color : 'white',
+    borderColor : '#004d40'
+  }
+
+
     return (
 
-        <div
-            className="task"
-            style={{display : task.toUpdate? "none" : "flex"}}
+        <Container
+        style={{
+        color : 'white',
+            display : task.toUpdate? "none" : "flex",
+         //   textAlign : 'center',
+            marginTop : '0.1em',
+            marginBottom:'0.1em',
+            alignItems: 'center',
+           // justifyContent:'center'
+           //className="task square border border-primary"
+       
+            //alignItems : 'center',
+        }}
         >
+ 
+                <Col
+            xs = {1}
 
-            <Form.Check
+                style={{width : '6%',
+                //maxHeight : '12px',
+               // padding: '0'
+                }}
+                >
+                <Form.Check
                 type="checkbox"
                 defaultChecked={task.isDone}
                 onChange={e => checkTask(id)}
-            />
+                />
+                </Col>
 
-            <p style={{textDecoration : task.isDone ? "line-through" : ""}}>
+                <Col
+                      xs = {4}
+                style={{ 
+                    textAlign:'start',
+    width : '60%',
+    textDecoration : task.isDone ? "line-through" : ""}}>
                 {task.text}
-            </p>
-            
-            <Button onClick={() => removeTask(id)}>
+         
+                </Col>
+
+                <Col
+             //   xs = {4}
+                style={{width : '20%',
+            textAlign: 'end'}}
+                >
+                <Button 
+                style={btn}
+                onClick={() => removeTask(id)}>
                 delete
             </Button>
 
-            <Button onClick={() => updateTaskElement(id)}>
-                update;
+            <Button 
+                style={btn}
+                onClick={() => updateTaskElement(id)}>
+                update
             </Button>
+                </Col>
 
-        </div>
-
+        </Container>
+        
     )
 
 }

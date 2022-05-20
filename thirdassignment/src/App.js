@@ -1,8 +1,8 @@
 import './App.css';
 import TaskElement from './TaskElement';
 import { React, useState } from 'react';
-import { FormControl, Button, InputGroup } from "react-bootstrap";
-
+import { FormControl, Button, InputGroup, Card } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.css';
 function App() {
 
   const [tasks, setTasks] = useState([
@@ -81,52 +81,78 @@ function App() {
      
   }
 
+  // well trying things
+  const btn = {
+    backgroundColor:'#00695c',
+    color : 'white',
+    borderColor : '#004d40'
+  }
+
+  //#00261f
+
+  
 
   return (
-    <div className="ToDoApp">
 
-      <div className="Todos">
-        {tasks.map((task, index) => (
+      <Card 
+        className='z-depth-3'
+        style={{
+          backgroundColor : '#004d40',
+          color: 'white',
+          marginLeft : 'auto', marginRight: 'auto', marginTop: 50, marginBottom: 50, width: '500px'}}>
 
-          <TaskElement 
-                task={task}
-                key={index}
-                id = {index}
-                updateTaskElement={updateTaskElement}
-                checkTask={checkTask}
-                removeTask={removeTask}
-          />
+        <Card.Body style={{margin : '0.4em'}}>
 
-        ))}
-      </div>
-      
-      <div className="TodoActions">
+          <Card.Title className='text-center'
+          >What are we doing today?</Card.Title>
+          
+          <div className="Todos" style={{marginTop : '1.5em'}}>
+            {tasks.map((task, index) => (
 
-        <InputGroup>
-            
-            <FormControl
-                placeholder="E.g. Go Shopping"
-                type="text"
-                className="input"
-                value={newTask}
-                onChange={e => setNewTask(e.target.value)}
-            />
-            
-            <Button 
-                variant="outline-secondary"
-                onClick={handleAddition}
-            >Add</Button>
+              <TaskElement 
+                    task={task}
+                    key={index}
+                    id = {index}
+                    updateTaskElement={updateTaskElement}
+                    checkTask={checkTask}
+                    removeTask={removeTask}
+              />
 
-            <Button 
-                variant="outline-secondary"
-                onClick={() => updateTask(newTask)}
-            >Update</Button>
+            ))}
+          </div>
 
-        </InputGroup>
+          <InputGroup style={{marginTop : '1.5em',
+            borderColor : '#004d40'
+          }}>
+              
+              <FormControl
+                  placeholder="E.g. Go Shopping"
+                  type="text"
+                  className="input"
+                  value={newTask}
+                  onChange={e => setNewTask(e.target.value)}
+              />
+              
+              <Button 
+                style = {btn}
+                  variant="outline-secondary"
+                  onClick={handleAddition}
+              >Add</Button>
 
-      </div>
+              <Button 
+              style = {btn}
+                  variant="outline-secondary"
+                  onClick={() => updateTask(newTask)}
+              >Update</Button>
 
-    </div>
+          </InputGroup>
+
+        </Card.Body>
+
+
+      </Card>
+
+
   );
 }
 
