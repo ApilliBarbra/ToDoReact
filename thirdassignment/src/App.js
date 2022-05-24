@@ -1,12 +1,13 @@
 import './App.css';
 import TaskElement from './TaskElement';
 import { React, useState } from 'react';
-import { FormControl, Button, InputGroup, Card } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';
+import { FormControl, Button, InputGroup, Card } from "react-bootstrap";
+
+// main function
 function App() {
 
   const [tasks, setTasks] = useState([
-
     {
       text: "Figure out React",
       isDone: false,
@@ -27,13 +28,8 @@ function App() {
   const handleAddition = e => {
     e.preventDefault();
 
-    console.log("hectic");
-    console.log(newTask);
-
     // if it is empty, do nothing
     if (!newTask) return;
-
-    console.log("Add element");
 
     let newT = {
         text: newTask,
@@ -43,7 +39,6 @@ function App() {
     addTask(newT);
     setNewTask("");
 
-    console.log("Added");
   };
 
   const checkTask = id => {
@@ -71,7 +66,6 @@ function App() {
     if (updateTaskId === -1) return;
 
     const newTasksList = [...tasks];
-
     newTasksList[updateTaskId].text = newText;
     newTasksList[updateTaskId].toUpdate = !newTasksList[updateTaskId].toUpdate;
 
@@ -88,10 +82,6 @@ function App() {
     borderColor : '#004d40'
   }
 
-  //#00261f
-
-  
-
   return (
 
       <Card 
@@ -99,12 +89,12 @@ function App() {
         style={{
           backgroundColor : '#004d40',
           color: 'white',
-          marginLeft : 'auto', marginRight: 'auto', marginTop: 50, marginBottom: 50, width: '500px'}}>
+          marginLeft : 'auto', marginRight: 'auto', marginTop: 50, marginBottom: 50, width: '500px'}}
+      >
 
         <Card.Body style={{margin : '0.4em'}}>
 
-          <Card.Title className='text-center'
-          >What are we doing today?</Card.Title>
+          <Card.Title className='text-center'>What are we doing today?</Card.Title>
           
           <div className="Todos" style={{marginTop : '1.5em'}}>
             {tasks.map((task, index) => (
@@ -125,33 +115,23 @@ function App() {
             borderColor : '#004d40'
           }}>
               
-              <FormControl
-                  placeholder="E.g. Go Shopping"
-                  type="text"
-                  className="input"
-                  value={newTask}
-                  onChange={e => setNewTask(e.target.value)}
-              />
-              
-              <Button 
-                style = {btn}
-                  variant="outline-secondary"
-                  onClick={handleAddition}
-              >Add</Button>
+            <FormControl
+                placeholder="E.g. Go Shopping"
+                type="text"
+                className="input"
+                value={newTask}
+                onChange={e => setNewTask(e.target.value)}
+            />
+                
+            <Button style = {btn} variant="outline-secondary" onClick={handleAddition}>Add</Button>
 
-              <Button 
-              style = {btn}
-                  variant="outline-secondary"
-                  onClick={() => updateTask(newTask)}
-              >Update</Button>
+            <Button style = {btn} variant="outline-secondary" onClick={() => updateTask(newTask)}>Update</Button>
 
           </InputGroup>
 
         </Card.Body>
 
-
       </Card>
-
 
   );
 }
